@@ -1,5 +1,8 @@
 <?php
 require 'Config.php';
+
+//header("Acces-Control-Allow-Origin: *");
+//header("Content-Type: application/json; charset=UFT=8");
 session_start();
 $sql = "SELECT * FROM team";
 $query = $db->query($sql);

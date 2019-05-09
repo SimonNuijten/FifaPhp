@@ -27,6 +27,7 @@ $users = $queryUser->fetchAll(PDO::FETCH_ASSOC);
             <input type="password" placeholder="password" name="password">
             <input type="submit" placeholder="Login" name="submitLogin" value="login">
             <p class="message">Not registered? <a href="Registerform.php">Create an account</a></p>
+            <p class="message">Password <a href="passwordForget.php">Forgotten?</a></p>
         </form>
     </div>
 </div>
