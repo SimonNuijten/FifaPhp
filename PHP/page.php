@@ -7,17 +7,8 @@ session_start();
 $sql = "SELECT * FROM team";
 $query = $db->query($sql);
 $teams = $query->fetchAll(PDO::FETCH_ASSOC);
-/*
-$id = $_GET['userId'];
-$sqlUser = "SELECT * FROM users WHERE userId = :Id";
-$prepareUser = $db->prepare($sql);
-$prepareUser->execute([
-    ':Id' => $id
-]);
 
-$id = $_GET['userId'];
-$idUser = $_SESSION['idUser'] = $id;
-*/
+
 $id = $_SESSION['id'];
 ?>
 <!doctype html>
@@ -32,6 +23,12 @@ $id = $_SESSION['id'];
     <title>Document</title>
 </head>
 <body background="Background.jpg">
+<div class="logOut">
+<form class="login-form" action="configController.php" method="post">
+    <input type="hidden" name="type" value="Logout">
+    <input type="submit" placeholder="Login" name="submitLogin" value="Logout">
+</form>
+</div>
 <div class="form">
     <form class="login-form" action="configController.php" method="post">
         <input type="hidden" name="type" value="teamCreateLink">

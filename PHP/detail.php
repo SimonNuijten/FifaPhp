@@ -21,7 +21,7 @@ $team = $prepare->fetch(PDO::FETCH_ASSOC);
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Recipe</title>
 </head>
-<body>
+<body background="Background.jpg">
 <div class="container">
     <h1>Delete Team :</h1>
     <div class="login-page">

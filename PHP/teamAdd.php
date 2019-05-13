@@ -11,14 +11,14 @@ session_start();
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Document</title>
 </head>
-<body>
+<body background="Background.jpg">
 <div class="login-page">
     <div class="form">
 
         <form class="login-form" action="configController.php" method="post">
             <input type="hidden" name="type" value="teamCreate">
-            <input type="text" placeholder="Naam" name="teamName">
-            <input type="text" placeholder="Beschrijving" name="TeamDescription">
+            <input type="text" placeholder="Naam" name="teamName" required>
+            <input type="text" placeholder="Beschrijving" name="TeamDescription"required >
             <input type="submit" placeholder="Create" name="submitLogin" value="teamCreate">
         </form>
     </div>

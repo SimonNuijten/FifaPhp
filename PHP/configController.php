@@ -118,7 +118,7 @@ if($_POST['type'] == 'delete'){
         echo 'U bent niet rechtvaardigt dit te doen ';
     }
 }
-if($_POST['type'] == 'teamCreate'){
+if($_POST['type'] == 'teamCreate'){ 
     $description = $_POST['TeamDescription'];
     $name = $_POST['teamName'];
     $userID = $_SESSION['id'];
@@ -156,4 +156,8 @@ if($_POST['type'] == 'Forget'){
     $headers .= 'From: <SimonNuijten@gmail.com.com>' . "\r\n";
 
     mail("$email","Password forgotten",$msg,$headers    );
+}
+if($_POST['type'] == 'Logout'){
+    header('Location: index.php');
+    session_destroy();
 }

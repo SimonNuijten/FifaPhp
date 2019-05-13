@@ -1,6 +1,4 @@
-body img {
-  display: inline-block;
-}
+
 .login-page {
   display: block;
 }
@@ -23,4 +21,7 @@ ul{
 }
 .form {
   padding: 0px;
+}
+.logOut{
+  display: inline-block;
 }

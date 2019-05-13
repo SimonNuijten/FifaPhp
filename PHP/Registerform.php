@@ -11,15 +11,15 @@ session_start();
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Document</title>
 </head>
-<body>
+<body background="Background.jpg">
 <div class="login-page">
     <div class="form">
 
         <form class="login-form" method="post" action="configController.php">
             <input type="hidden" name="type" value="create">
-            <input type="text" placeholder="username" name="username">
-            <input type="password" placeholder="password" name="password">
-            <input type="text" placeholder="Email" name="email">
+            <input type="text" placeholder="username" name="username" required>
+            <input type="password" placeholder="password" name="password" required>
+            <input type="email" placeholder="Email" name="email" required>
             <input type="submit" placeholder="Login" name="submitLogin" value="create">
         </form>
     </div>
