@@ -1,5 +1,5 @@
 <?php
-require 'config.php';
+require 'Config.php';
 session_start();
 $sql = "SELECT * FROM team";
 $query = $db->query($sql);
@@ -15,7 +15,7 @@ $prepareUser->execute([
 $id = $_GET['userId'];
 $idUser = $_SESSION['idUser'] = $id;
 */
-$id = $_SESSION['id'];
+
 
 $num_team = 6;
 $num_week = 5;
@@ -32,8 +32,8 @@ for($x = 0; $x < $num_team; $x++){
 
 for ($x = 0; $x < $num_week; $x++){
     for($i = 0; $i < $n2; $i++){
-        $team1 = $teams[$n2 - $i];
-        $team2 = $teams[ $n2 + $i + 1];
+        $team1 = $teams['name'];
+        $team2 = $teams['name'];
         $results[$team1][$x] = $team2;
         $results[$team2][$x] = $team1;
         echo $results[$team1] [ $x] . " vs " . $results[$team2][$x] . "<br>";
