@@ -1,5 +1,12 @@
 <?php
+require 'Config.php';
 session_start();
+
+$sqlUser = "SELECT * FROM users";
+$queryUser = $db->query($sqlUser);
+$users = $queryUser->fetchAll(PDO::FETCH_ASSOC);
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -20,15 +27,14 @@ session_start();
 </header>
 <div class="login-page">
     <div class="form">
-
         <form class="login-form" action="configController.php" method="post">
-            <input type="hidden" name="type" value="teamCreate">
-            <input type="text" placeholder="Naam" name="teamName" required>
-            <input type="text" placeholder="Beschrijving" name="TeamDescription"required >
-            <input type="submit" placeholder="Create" name="submitLogin" value="teamCreate">
+            <input type="hidden" name="type" value="Forget">
+            <input type="email" placeholder="Email" name="Email">
+            <input type="submit" placeholder="Login" name="submitLogin" value="Forget">
         </form>
     </div>
 </div>
+
 
 </body>
 </html>

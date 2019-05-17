@@ -7,7 +7,6 @@
 }
 table {
   border-collapse: collapse;
-  margin-top: 5%;
 }
 ul {
   list-style-type: none;
@@ -51,17 +50,11 @@ table, td, th {
   padding: 45px;
   text-align: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-  margin-top: 50%;
+
 }
 .form a {
   text-decoration: none;
   color: #000;
-  list-style-type: none;
-}
-.form h2 {
-  text-decoration: none;
-  color: #000;
-  list-style-type: none;
 }
 
 .form input {
@@ -111,6 +104,7 @@ table, td, th {
   z-index: 1;
   max-width: 300px;
   margin: 0 auto;
+  margin-top: 10%;
 }
 .container:before, .container:after {
   content: "";

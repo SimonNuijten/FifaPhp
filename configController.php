@@ -22,7 +22,7 @@ if($_POST['type'] == 'create'){
     ]);
     var_dump(password_hash($password, PASSWORD_DEFAULT));
     var_dump($password);
-    header("refresh:6;url=Index.php");
+    header("refresh:6;url=index.php");
     exit;
 }
 if($_POST['type'] == 'login') {
@@ -32,7 +32,7 @@ if($_POST['type'] == 'login') {
 
     if (empty($username) || empty($password)) {
         echo "Je wachtwoord of gebruikersnaam is leeg";
-        header("refresh:6;url=Index.php");
+        header("refresh:6;url=index.php");
     } else {
 
         $sql = "SELECT * FROM users WHERE username = :Username";
@@ -58,7 +58,7 @@ if($_POST['type'] == 'login') {
             $_SESSION['username'] = $user['username'];
         } else {
             echo "Je wachtwoord of gebruikersnaam is onjuist";
-            header("refresh:6;url=Index.php");
+            header("refresh:6;url=index.php");
         }
     }
 }
@@ -74,7 +74,6 @@ if($_POST['type'] == 'edit') {
     $team = $prepare->fetch(PDO::FETCH_ASSOC);
 
     if($_SESSION['username'] == $team['teamCreator']) {
-        echo 'hoi';
         $username = $_POST['name'];
         $description = $_POST['description'];
         $id = $_GET['id'];
@@ -118,7 +117,7 @@ if($_POST['type'] == 'delete'){
         echo 'U bent niet rechtvaardigt dit te doen ';
     }
 }
-if($_POST['type'] == 'teamCreate'){
+if($_POST['type'] == 'teamCreate'){ 
     $description = $_POST['TeamDescription'];
     $name = $_POST['teamName'];
     $userID = $_SESSION['id'];
@@ -144,4 +143,40 @@ if($_POST['type'] == 'teamCreate'){
 }
 if($_POST['type'] == 'teamCreateLink'){
     header('Location: teamAdd.php');
+}
+if($_POST['type'] == 'Forget'){
+    header('Location: index.php');
+    $email = $_POST['Email'];
+
+    $msg = "Yeah boi\nSecond line of text";
+
+    $msg = wordwrap($msg,70);
+
+    $headers .= 'From: <NoReply@gmail.com>' . "\r\n";
+
+    mail("$email","Password forgotten",$msg,$headers    );
+}
+if($_POST['type'] == 'Logout'){
+    header('Location: index.php');
+    session_destroy();
+}
+if($_POST['type'] == 'addPlayer'){
+
+    $name = $_SESSION['teamName'];
+    $id = $_SESSION['id'];
+    $player = $_POST['nameAdd'];
+
+
+    $sql = "UPDATE users SET Team = :team WHERE username = :Id";
+    $prepare = $db->prepare($sql);
+    $prepare->execute([
+        ':team'     => $name,
+        ':Id' => $player
+    ]);
+    header('Location: page.php');
+    
+
+
+
+
 }
