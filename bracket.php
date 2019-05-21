@@ -49,9 +49,10 @@ foreach ($teams as $team) {
 
         $minute += $_SESSION['Rust'];
 
-        
+
          if($minute + $_SESSION['playTime'] > 60){
-            $minute -  60;
+            $rest = $minute -  60;
+            $minute = $rest;
             $time += 1;
         }
          else if($minute + $_SESSION['playTime'] == 60){
