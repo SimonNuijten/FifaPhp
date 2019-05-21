@@ -179,5 +179,10 @@ if($_POST['type'] == 'addPlayer'){
 if($_POST['type'] == 'timeSet'){
    $time = $_POST['timeSet'];
    $_SESSION['time'] = $time;
-    header('Location: page.php');
+    header('Location: bracket.php');
+    $playTime = $_POST['playTime'];
+    $_SESSION['playTime'] = $playTime;
+    $rust = $_POST['Rust'];
+    $_SESSION['Rust'] = $rust;
+
 }

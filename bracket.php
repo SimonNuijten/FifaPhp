@@ -26,7 +26,7 @@ $prepare = $db->prepare($sql);
 $prepare->execute();
 $teams = $prepare->fetchAll(PDO::FETCH_ASSOC);
 $teamsLength = count($teams);
-$minute = 15;
+$minute = 0;
 $time = $_SESSION['time'];
 ?>
 <table>
@@ -46,12 +46,20 @@ foreach ($teams as $team) {
         ?>
             <tr>
         <?php
-        if($minute + 15 == 60){
+
+        $minute += $_SESSION['Rust'];
+
+        
+         if($minute + $_SESSION['playTime'] > 60){
+            $minute -  60;
             $time += 1;
-            $minute = 0;
+        }
+         else if($minute + $_SESSION['playTime'] == 60){
+            $time += 1;
+            $minute = 00;
         }
         else{
-            $minute += 15;
+            $minute += $_SESSION['playTime'] ;
         }
         echo "<td>$teamName</td>";
         echo "<td>$otherTeamName</td>";
@@ -71,6 +79,8 @@ foreach ($teams as $team) {
         <form action="configController.php" method="post">
             <input type="hidden" name="type" value="timeSet">
             <input type="text" name="timeSet" placeholder="Vul hier uw begin tijd in">
+            <input type="text" name="playTime" placeholder="Hoelang duurt de wedstrijd?">
+            <input type="text" name="Rust" placeholder="Hoelang zit pauze is er tussen de wedstrijden?">
             <input type="submit" value="timeSet">
         </form>
     </div>
