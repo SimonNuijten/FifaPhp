@@ -21,49 +21,64 @@
 <?php
 require 'Config.php';
 session_start();
+$sql = "SELECT name FROM team;";
+$prepare = $db->prepare($sql);
+$prepare->execute();
+$teams = $prepare->fetchAll(PDO::FETCH_ASSOC);
+$teamsLength = count($teams);
+$minute = 15;
+$time = $_SESSION['time'];
+?>
+<table>
+        <tr>
+        <th>Team 1</th>
+        <th>Team 2</th>
+            <th>Tijd</th>
+        </tr>
+<?php
+foreach ($teams as $team) {
+    $teams = array_slice($teams, 1, $teamsLength);
+    foreach ($teams as $otherTeam) {
+        $teamName = $team['name'];
+        $otherTeamName = $otherTeam['name'];
 
-        $sql = "SELECT name FROM team;";
-        $prepare = $db->prepare($sql);
-        $prepare->execute();
 
-        $teams = $prepare->fetchAll(PDO::FETCH_ASSOC);
-
-        $teamsLength = count($teams);
         ?>
-        <table align="center">
             <tr>
-                <th>Team 1</th>
-                <th>Team 2</th>
-            </tr>
-            <?php
+        <?php
+        if($minute + 15 == 60){
+            $time += 1;
+            $minute = 0;
+        }
+        else{
+            $minute += 15;
+        }
+        echo "<td>$teamName</td>";
+        echo "<td>$otherTeamName</td>";
+        echo "<td>$time:$minute</td>";
 
-            foreach ($teams as $team) {
-                $teams = array_slice($teams, 1, $teamsLength);
 
-                foreach ($teams as $otherTeam) {
-                    $teamName = $team['name'];
-                    $otherTeamName = $otherTeam['name'];
-                    ?>
-                    <tr>
-                    <?php
+    }
+    ?>
+        </tr>
 
-                    echo "<td>$teamName</td>";
-                    echo "<td>$otherTeamName</td>";
+    <?php
 
-                }
-                ?>
-                </tr>
-                <?php
-
-            }
-            ?> </table>
+}
+?> </table>
+<div class="login-page">
+    <div class="form">
+        <form action="configController.php" method="post">
+            <input type="hidden" name="type" value="timeSet">
+            <input type="text" name="timeSet" placeholder="Vul hier uw begin tijd in">
+            <input type="submit" value="timeSet">
+        </form>
+    </div>
+</div>
 <?php
 $s = 1;
 if($s == 2){
-
 }
 else {
-
 }
 ?>
-

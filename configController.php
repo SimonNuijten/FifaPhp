@@ -56,6 +56,7 @@ if($_POST['type'] == 'login') {
             $_SESSION['loggedin'] = true;
             $_SESSION['id'] = $user['userId'];
             $_SESSION['username'] = $user['username'];
+            $_SESSION['loginCheck'] = true;
         } else {
             echo "Je wachtwoord of gebruikersnaam is onjuist";
             header("refresh:6;url=index.php");
@@ -162,21 +163,21 @@ if($_POST['type'] == 'Logout'){
 }
 if($_POST['type'] == 'addPlayer'){
 
-    $name = $_SESSION['teamName'];
-    $id = $_SESSION['id'];
+    $id = $_GET['id'];
     $player = $_POST['nameAdd'];
 
 
     $sql = "UPDATE users SET Team = :team WHERE username = :Id";
     $prepare = $db->prepare($sql);
     $prepare->execute([
-        ':team'     => $name,
+        ':team'     => $id,
         ':Id' => $player
     ]);
     header('Location: page.php');
-    
 
-
-
-
+}
+if($_POST['type'] == 'timeSet'){
+   $time = $_POST['timeSet'];
+   $_SESSION['time'] = $time;
+    header('Location: page.php');
 }
