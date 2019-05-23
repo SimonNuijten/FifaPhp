@@ -183,7 +183,7 @@ if($_POST['type'] == 'timeSet'){
 }
 
 if ($_POST['type'] == 'selectedField'){
-    $max = $_POST['selectedField'];
+    $max = $_POST['field'];
     $_SESSION['max'] = $max;
     header ('location: page.php');
 }
