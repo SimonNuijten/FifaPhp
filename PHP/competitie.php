@@ -6,7 +6,7 @@
  * Time: 10:01
  */
 require 'Config.php';
-$sql = "SELECT * FROM `match`";              //string even opslaan die we later gaan gebruiken
+$sql = "SELECT * FROM `matches`";              //string even opslaan die we later gaan gebruiken
 $query = $db->query($sql);                      //qurey verzoek data base sla ik op in variablke
 $teams = $query->fetchAll(PDO::FETCH_ASSOC); //multie demensionale array //alle colomen wil ik fetchen -> binnen halen
 
