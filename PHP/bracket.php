@@ -1,51 +1,3 @@
-<?php
-require 'Config.php';
-session_start();
-$sql = "SELECT * FROM team";
-$query = $db->query($sql);
-$teams = $query->fetchAll(PDO::FETCH_ASSOC);
-/*
-$id = $_GET['userId'];
-$sqlUser = "SELECT * FROM users WHERE userId = :Id";
-$prepareUser = $db->prepare($sql);
-$prepareUser->execute([
-    ':Id' => $id
-]);
-
-$id = $_GET['userId'];
-$idUser = $_SESSION['idUser'] = $id;
-*/
-
-
-$num_team = 6;
-$num_week = 5;
-
-if ($num_team % 2 != 0){
-    $num_team++;
-}
-
-$n2 = ($num_team-1)/2;
-
-for($x = 0; $x < $num_team; $x++){
-    $teams[$x] = $x+1;
-}
-
-for ($x = 0; $x < $num_week; $x++){
-    for($i = 0; $i < $n2; $i++){
-        $team1 = $teams['name'];
-        $team2 = $teams['name'];
-        $results[$team1][$x] = $team2;
-        $results[$team2][$x] = $team1;
-        echo $results[$team1] [ $x] . " vs " . $results[$team2][$x] . "<br>";
-    }
-    echo "<br>";
-    $tmp = $teams [1];
-    for ($i = 1; $i < sizeof($teams)-1; $i++){
-        $teams[$i] = $teams[$i+1];
-    }
-    $teams[sizeof($teams)-1] = $tmp;
-}
-?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -54,13 +6,105 @@ for ($x = 0; $x < $num_week; $x++){
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="page.css">
     <title>Document</title>
 </head>
 <body>
-
-
+<header>
+    <ul>
+        <li><a class="active" href="page.php">Home</a></li>
+        <li><a href="bracket.php">Team Programma</a></li>
+    </ul>
+</header>
 
 </body>
 </html>
+<?php
+require 'Config.php';
+session_start();
+$sql = "SELECT name FROM team;";
+$prepare = $db->prepare($sql);
+$prepare->execute();
+$teams = $prepare->fetchAll(PDO::FETCH_ASSOC);
+$teamsLength = count($teams);
+$minute = 0;
+$time = $_SESSION['time'];
+$min = 1;
 
+?>
+<table>
+    <tr>
+        <th>Team 1</th>
+        <th>Team 2</th>
+        <th>Tijd</th>
+        <th>veld</th>
+    </tr>
+    <?php
+    foreach ($teams as $team) {
+        $teams = array_slice($teams, 1, $teamsLength);
+        foreach ($teams as $otherTeam) {
+            $teamName = $team['name'];
+            $otherTeamName = $otherTeam['name'];
+
+
+            ?>
+            <tr>
+            <?php
+
+            $minute += $_SESSION['Rust'];
+
+
+            if($minute + $_SESSION['playTime'] > 60){
+                $rest = $minute -  60;
+                $minute = $rest;
+                $time += 1;
+            }
+            else if($minute + $_SESSION['playTime'] == 60){
+                $time += 1;
+                $minute = 00;
+            }
+            else{
+                $minute += $_SESSION['playTime'] ;
+            }
+
+            $field = mt_rand($min, $max);
+
+            echo "<td>$teamName</td>";
+            echo "<td>$otherTeamName</td>";
+            echo "<td>$time:$minute</td>";
+            echo "<td>$field</td>";
+
+
+        }
+        ?>
+        </tr>
+
+        <?php
+
+    }
+    ?> </table>
+<div class="login-page">
+    <div class="form">
+        <form action="configController.php" method="post">
+            <input type="hidden" name="type" value="timeSet">
+            <input type="text" name="timeSet" placeholder="Vul hier uw begin tijd in">
+            <input type="text" name="playTime" placeholder="Hoelang duurt de wedstrijd?">
+            <input type="text" name="Rust" placeholder="Hoelang zit pauze is er tussen de wedstrijden?">
+            <input type="submit" value="timeSet">
+        </form>
+    </div>
+    <div class="form">
+        <form action="configController.php" method="post">
+            <input type="hidden" name="type" value="selctedField">
+            <input type="text" name="field" placeholder="aantal velden">
+            <input type="submit" value="aantal velden">
+        </form>
+    </div>
+
+</div>
+<?php
+$s = 1;
+if($s == 2){
+}
+else {
+}
+?>
