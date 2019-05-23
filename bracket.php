@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -28,53 +29,50 @@ $teams = $prepare->fetchAll(PDO::FETCH_ASSOC);
 $teamsLength = count($teams);
 $minute = 0;
 $time = $_SESSION['time'];
+$min = 1;
+$max = 4;
 ?>
 <table>
-        <tr>
+    <tr>
         <th>Team 1</th>
         <th>Team 2</th>
-            <th>Tijd</th>
-        </tr>
-<?php
-foreach ($teams as $team) {
-    $teams = array_slice($teams, 1, $teamsLength);
-    foreach ($teams as $otherTeam) {
-        $teamName = $team['name'];
-        $otherTeamName = $otherTeam['name'];
-
-
-        ?>
-            <tr>
-        <?php
-
-        $minute += $_SESSION['Rust'];
-
-
-         if($minute + $_SESSION['playTime'] > 60){
-            $rest = $minute -  60;
-            $minute = $rest;
-            $time += 1;
-        }
-         else if($minute + $_SESSION['playTime'] == 60){
-            $time += 1;
-            $minute = 00;
-        }
-        else{
-            $minute += $_SESSION['playTime'] ;
-        }
-        echo "<td>$teamName</td>";
-        echo "<td>$otherTeamName</td>";
-        echo "<td>$time:$minute</td>";
-
-
-    }
-    ?>
-        </tr>
-
+        <th>Tijd</th>
+        <th>veld</th>
+    </tr>
     <?php
+    foreach ($teams as $team) {
+        $teams = array_slice($teams, 1, $teamsLength);
+        foreach ($teams as $otherTeam) {
+            $teamName = $team['name'];
+            $otherTeamName = $otherTeam['name'];
+            ?>
+            <tr>
+            <?php
+            $minute += $_SESSION['Rust'];
+            if($minute + $_SESSION['playTime'] > 60){
+                $rest = $minute -  60;
+                $minute = $rest;
+                $time += 1;
+            }
+            else if($minute + $_SESSION['playTime'] == 60){
+                $time += 1;
+                $minute = 00;
+            }
+            else{
+                $minute += $_SESSION['playTime'] ;
+            }
+            $field = mt_rand($min, $max);
+            echo "<td>$teamName</td>";
+            echo "<td>$otherTeamName</td>";
+            echo "<td>$time:$minute</td>";
+            echo "<td>$field</td>";
+        }
+        ?>
+        </tr>
 
-}
-?> </table>
+        <?php
+    }
+    ?> </table>
 <div class="login-page">
     <div class="form">
         <form action="configController.php" method="post">

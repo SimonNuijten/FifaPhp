@@ -177,12 +177,27 @@ if($_POST['type'] == 'addPlayer'){
 
 }
 if($_POST['type'] == 'timeSet'){
-   $time = $_POST['timeSet'];
-   $_SESSION['time'] = $time;
-    header('Location: bracket.php');
-    $playTime = $_POST['playTime'];
-    $_SESSION['playTime'] = $playTime;
-    $rust = $_POST['Rust'];
-    $_SESSION['Rust'] = $rust;
+
+
+    $Userid = $_SESSION['id'];
+
+    $sql = "SELECT * FROM users WHERE userId = :Id";
+    $prepare = $db->prepare($sql);
+    $prepare->execute([
+        ':Id' => $Userid
+    ]);
+    $users = $prepare->fetch(PDO::FETCH_ASSOC);
+    if($users['adminRights'] == 1){
+        $time = $_POST['timeSet'];
+        $_SESSION['time'] = $time;
+        header('Location: bracket.php');
+        $playTime = $_POST['playTime'];
+        $_SESSION['playTime'] = $playTime;
+        $rust = $_POST['Rust'];
+        $_SESSION['Rust'] = $rust;
+    }
+    else{
+        echo 'U bent niet rechtvaardigt dit te doen ';
+    }
 
 }
