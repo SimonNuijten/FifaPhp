@@ -18,7 +18,13 @@ $users = $queryUser->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" type="text/css" href="style.css">
     <title>Document</title>
 </head>
-<body background="Background.jpg">
+<body>
+<header>
+<ul>
+    <li><a class="active" href="page.php">Home</a></li>
+    <li><a href="bracket.php">Team Programma</a></li>
+</ul>
+</header>
     <div class="login-page">
         <div class="form">
             <form class="login-form" action="configController.php" method="post">
@@ -31,8 +37,5 @@ $users = $queryUser->fetchAll(PDO::FETCH_ASSOC);
             </form>
         </div>
     </div>
-
-
-
 </body>
 </html>

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -44,15 +45,10 @@ $min = 1;
         foreach ($teams as $otherTeam) {
             $teamName = $team['name'];
             $otherTeamName = $otherTeam['name'];
-
-
             ?>
             <tr>
             <?php
-
             $minute += $_SESSION['Rust'];
-
-
             if($minute + $_SESSION['playTime'] > 60){
                 $rest = $minute -  60;
                 $minute = $rest;
@@ -65,21 +61,16 @@ $min = 1;
             else{
                 $minute += $_SESSION['playTime'] ;
             }
-
-            $field = mt_rand($min, $max);
-
+            $field = mt_rand($min, $_SESSION['max']);
             echo "<td>$teamName</td>";
             echo "<td>$otherTeamName</td>";
             echo "<td>$time:$minute</td>";
             echo "<td>$field</td>";
-
-
         }
         ?>
         </tr>
 
         <?php
-
     }
     ?> </table>
 <div class="login-page">
@@ -92,14 +83,13 @@ $min = 1;
             <input type="submit" value="timeSet">
         </form>
     </div>
-    <div class="form">
-        <form action="configController.php" method="post">
-            <input type="hidden" name="type" value="selctedField">
-            <input type="text" name="field" placeholder="aantal velden">
-            <input type="submit" value="aantal velden">
-        </form>
-    </div>
-
+</div>
+<div class="form">
+    <form action="configController.php" method="post">
+        <input type="hidden" name="type" value="selctedField">
+        <input type="text" name="field" placeholder="aantal velden">
+        <input type="submit" value="aantal velden">
+    </form>
 </div>
 <?php
 $s = 1;

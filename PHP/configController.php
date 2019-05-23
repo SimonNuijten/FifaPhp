@@ -118,7 +118,7 @@ if($_POST['type'] == 'delete'){
         echo 'U bent niet rechtvaardigt dit te doen ';
     }
 }
-if($_POST['type'] == 'teamCreate'){
+if($_POST['type'] == 'teamCreate'){ 
     $description = $_POST['TeamDescription'];
     $name = $_POST['teamName'];
     $userID = $_SESSION['id'];
@@ -177,13 +177,34 @@ if($_POST['type'] == 'addPlayer'){
 
 }
 if($_POST['type'] == 'timeSet'){
-    $time = $_POST['timeSet'];
-    $_SESSION['time'] = $time;
-    header('Location: page.php');
-}
 
-if ($_POST['type'] == 'selectedField'){
+
+    $Userid = $_SESSION['id'];
+
+    $sql = "SELECT * FROM users WHERE userId = :Id";
+    $prepare = $db->prepare($sql);
+    $prepare->execute([
+        ':Id' => $Userid
+    ]);
+    $users = $prepare->fetch(PDO::FETCH_ASSOC);
+    if($users['adminRights'] == 1){
+        $time = $_POST['timeSet'];
+        $_SESSION['time'] = $time;
+        header('Location: bracket.php');
+        $playTime = $_POST['playTime'];
+        $_SESSION['playTime'] = $playTime;
+        $rust = $_POST['Rust'];
+        $_SESSION['Rust'] = $rust;
+    }
+    else{
+        echo 'U bent niet rechtvaardigt dit te doen ';
+    }
+
+}
+if ($_POST['type'] == 'selctedField'){
     $max = $_POST['field'];
     $_SESSION['max'] = $max;
-    header ('location: page.php');
+
+    header ('location: bracket.php');
+
 }
