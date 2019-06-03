@@ -9,7 +9,6 @@ require 'Config.php';
 $sql = "SELECT * FROM `matches`";              //string even opslaan die we later gaan gebruiken
 $query = $db->query($sql);                      //qurey verzoek data base sla ik op in variablke
 $teams = $query->fetchAll(PDO::FETCH_ASSOC); //multie demensionale array //alle colomen wil ik fetchen -> binnen halen
-
 echo "</ul>";
 foreach ($teams as $team){
     $team1 = htmlentities($team['team1']); //zodat html tags worden gecancled

@@ -20,8 +20,6 @@ if($_POST['type'] == 'create'){
         ':Password' => $hashed_password,
         ':Email' => $email
     ]);
-    var_dump(password_hash($password, PASSWORD_DEFAULT));
-    var_dump($password);
     header("refresh:6;url=index.php");
     exit;
 }
@@ -207,4 +205,21 @@ if ($_POST['type'] == 'selctedField'){
 
     header ('location: bracket.php');
 
+}
+if ($_POST['type'] == 'goals'){
+   $name = $_POST['username'];
+
+
+    $sql = "INSERT INTO goals ( idTeam, nameTeam) 
+        VALUES ( :id, :Name)";
+    $prepare = $db->prepare($sql);
+    $prepare->execute([
+        ':id' => $_SESSION['idName'],
+        ':Name' => $name
+    ]);
+
+
+}
+if ($_POST['type'] == 'competitie'){
+    header ('location: competitieController.php');
 }

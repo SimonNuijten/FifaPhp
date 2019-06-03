@@ -21,9 +21,10 @@ foreach ($teams as $team){
         echo "<li>$team1" . "  - " . "$team2</a></li>";
 
         if ($_POST ['type'] == 'check') {
-            $sql = "INSERT INTO `match` (team1, team2) 
-values (:team1, :team2)";
 
+
+            $sql = "INSERT INTO `matches` (team1, team2) 
+values (:team1, :team2)ON DUPLICATE KEY UPDATE team1=:team1, team2=:team2";
             $prepare = $db->prepare($sql);
             $prepare->execute([
                 ':team1'     => $team1,
@@ -35,12 +36,12 @@ values (:team1, :team2)";
 }
 
 ?>
-<form action="competitieController.php" method="post">
-    <input type="hidden" name="type" value="check">
-    <div class="button">
-        <input type="submit" value="bevestig" name="button">
-    </div>
-</form>
+    <form action="competitieController.php" method="post">
+        <input type="hidden" name="type" value="check">
+        <div class="button">
+            <input type="submit" value="bevestig" name="button">
+        </div>
+    </form>
     <a href="competitie.php">vul uw score in</a>
 <?php
 

@@ -7,6 +7,7 @@
  */
 
 require 'Config.php';
+session_start();
 $id = $_GET['id'];
 $sql = "SELECT * FROM `matches` WHERE id = :id";
 $prepare = $db->prepare($sql);
@@ -14,6 +15,12 @@ $prepare->execute([
     ':id' => $id
 ]);
 $match = $prepare->fetch(PDO::FETCH_ASSOC);
+$_SESSION['idName'] = $id;
+
+$idName = $_GET['id'];
+$playernames = "SELECT * FROM goals WHERE idTeam = $idName";
+$query = $db->query($playernames);
+$players = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <body>
@@ -31,11 +38,37 @@ $match = $prepare->fetch(PDO::FETCH_ASSOC);
     <input type="submit" id='score_b' value="bevestig score">
 </form>
 
+<div class="form">
+
+    <form class="login-form" method="post" action="configController.php">
+        <input type="hidden" name="type" value="goals">
+        <input type="text" placeholder="username" name="username" required>
+        <input type="submit" placeholder="Login" name="submitLogin" value="goals">
+    </form>
+</div>
+<div class="player-table" align="center">
+    <p>Doelpunten makers</p>
+    <table>
+        <tr>
+        </tr>
+        <tr>
+            <?php foreach ($players as $player) {
+                $playername = $player['nameTeam'];
+
+                echo "<td>$playername</td>";
+
+            } ?>
+        </tr>
+    </table>
+
+</div>
 <?php
-require 'config.php';
+require 'Config.php';
+
+
 if ($_POST ['type'] == 'score') {
     $id = $_GET['id'];
-    $sql = 'UPDATE `match` SET
+    $sql = 'UPDATE `matches` SET
               score1      = :score1,
               score2      = :score2       
             WHERE id = :id';
