@@ -21,7 +21,7 @@ $scores['scores'] = array();
 
 //foreach ($matches as $match) {
 
-// array_push($scores['scores'], $match['score1'] . $match['team1'] . ' - ' . $match['team2'] . $match['score2']);
+   // array_push($scores['scores'], $match['score1'] . $match['team1'] . ' - ' . $match['team2'] . $match['score2']);
 
 //}
 
