@@ -23,13 +23,19 @@ foreach ($teams as $team){
         if ($_POST ['type'] == 'check') {
 
 
-            $sql = "INSERT INTO `matches` (team1, team2) 
+            /*$sql = "INSERT IGNORE INTO `matches` (team1, team2) 
 values (:team1, :team2)ON DUPLICATE KEY UPDATE team1=:team1, team2=:team2";
             $prepare = $db->prepare($sql);
             $prepare->execute([
                 ':team1'     => $team1,
                 ':team2'     => $team2
-            ]);
+            ]);*/
+
+$db->query("INSERT INTO matches (team1, team2)
+SELECT * FROM (SELECT '$team1', '$team2') AS tmp
+WHERE NOT EXISTS (
+SELECT * FROM matches WHERE team1 = '$team1' AND team2 = '$team2'
+) LIMIT 1;");
         }
 
     }

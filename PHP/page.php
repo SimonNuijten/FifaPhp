@@ -58,8 +58,12 @@ if($_SESSION['loginCheck'] == true) {
             </form>
         </div>
     </div>
-
-
+    <div class="form">
+        <form class="login-form" action="configController.php" method="post">
+            <input type="hidden" name="type" value="competitie">
+            <input type="submit" placeholder="Login" name="submitLogin" value="Results">
+        </form>
+    </div>
     </body>
     </html>
     <?php

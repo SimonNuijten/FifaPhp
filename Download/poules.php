@@ -11,10 +11,12 @@
 </head>
 <body>
 <header>
-    <ul>
-        <li><a class="active" href="page.php">Home</a></li>
-        <li><a href="bracket.php">Team Programma</a></li>
-    </ul>
+<ul>
+    <li><a class="active" href="page.php">Home</a></li>
+    <li><a href="bracket.php">Team Programma</a></li>
+	<li><a href="points.php">Punten</a></li>
+	<li><a href="poules.php">Poules</a></li>
+</ul>
 </header>
 
 </body>
@@ -38,6 +40,7 @@ $list = $prepare2->fetchAll(PDO::FETCH_ASSOC);
 $teamBool = false;
 ?>
 <?php
+
 if($teamBool == false)
 {
 ?>
@@ -118,5 +121,6 @@ if($s == 2){
 }
 else {
 }
-var_dump($list);
+
+
 ?>

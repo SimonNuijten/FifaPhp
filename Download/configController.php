@@ -34,7 +34,7 @@ if ($_POST ['type'] == 'score') {
     $id = $_GET['id'];
     
 	
-    if($score1 > $score1){
+    if($score1 > $score2){
         $team1 += 3;
         $team2 += 0;
     }
@@ -46,7 +46,11 @@ if ($_POST ['type'] == 'score') {
         $team1 += 1;
         $team2 += 1;
     }
-	
+	$sql1 = "UPDATE mathes played SET = :Points WHERE id = '$id'";
+    $prepare1 = $db->prepare($sql1);
+    $prepare1->execute([
+        ':Points' => '1'
+    ]);
 
     $teamNames = "SELECT * FROM matches WHERE id = '$id'";
     $query = $db->query($teamNames);
@@ -62,11 +66,7 @@ if ($_POST ['type'] == 'score') {
     $pointsHome = $teamsHomeList['points'];
     $teamHomePoints = $pointsHome += $team1;
 
-    $sql1 = "UPDATE team SET points = :Points WHERE name = '$teamHome'";
-    $prepare1 = $db->prepare($sql1);
-    $prepare1->execute([
-        ':Points' => $teamHomePoints
-    ]);
+    
 
 	$TeamNameÁway = "SELECT * FROM team WHERE name = '$teamAway'";
     $queryTeamAway = $db->query($TeamNameÁway);
@@ -94,10 +94,9 @@ if ($_POST ['type'] == 'score') {
         ':id'           => $id
     ]);
 
-	echo $team1;
-	echo $team2;
-    echo $teamAwayPoints;
-	echo $teamHomePoints;
+	echo "Uitslag is goed ingevoerd! :)";
+	header("refresh:2;url=points.php");
+	
     exit;
 };
 if($_POST['type'] == 'login') {

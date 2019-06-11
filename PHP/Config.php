@@ -1,8 +1,8 @@
 <?php
 $dbHost = 'localhost';
-$dbName = 'fifaproject';
-$dbUser = 'root';
-$dbPass = '';
+$dbName = 'u40085p35659_Fifa';
+$dbUser = 'u40085p35659_FifaProject';
+$dbPass = 'Simon4312';
 
 $db = new PDO(
     "mysql:host=$dbHost;dbname=$dbName;",

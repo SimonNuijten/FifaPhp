@@ -17,6 +17,9 @@ $query = $db->query($sql);
 
 $teams = $query->fetchAll(PDO::FETCH_ASSOC);
 
+if (isset( $_GET['token'] ) && !empty( $_GET['token'])) {
+   if ($_GET['token'] == 570724329) {
+
 if (isset( $_GET['id'] ) && !empty( $_GET['id'])){
 
     $id = $_GET['id'] - 1;
@@ -57,5 +60,8 @@ else {
 
     echo json_encode($teamNames);
 
+}
+
+}
 }
 

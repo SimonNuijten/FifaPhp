@@ -1,0 +1,46 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.login-page {
+  width: 360px;
+  margin: auto;
+  border-radius: 20px;
+}
+table {
+  border-collapse: collapse;
+  margin-top: 20%;
+}
+.Navbar2 ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display : block;
+}
+
+.Navbar2 li {
+  float: left;
+  list-style-type: none;
+}
+
+.Navbar2 li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.Navbar2 li a:hover:not(.active) {
+  background-color: #33C6FF;
+}
+
+.Navbar2 .active {
+  background-color: #337CFF;
+}
+
+

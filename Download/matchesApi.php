@@ -25,4 +25,12 @@ $scores['scores'] = array();
 
 //}
 
+if (isset( $_GET['token'] ) && !empty( $_GET['token'])) {
+   if ($_GET['token'] == 570724329) {
+
+
+
 echo json_encode($matches);
+}
+
+}

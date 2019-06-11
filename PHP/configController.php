@@ -23,6 +23,83 @@ if($_POST['type'] == 'create'){
     header("refresh:6;url=index.php");
     exit;
 }
+if ($_POST ['type'] == 'score') {
+
+    $score1 = $_POST['score1'];
+    $Score2 = $_POST['score2'];
+	$team1 = 0;
+	$team2 = 0;
+	$teamAwayPoints = 0;
+	$teamHomePoints = 0;
+    $id = $_GET['id'];
+    
+	
+    if($score1 > $score1){
+        $team1 += 3;
+        $team2 += 0;
+    }
+    else if($score1 < $Score2){
+        $team1 += 0;
+        $team2 += 3;
+    }
+    else if ($score1 == $Score2){
+        $team1 += 1;
+        $team2 += 1;
+    }
+	
+
+    $teamNames = "SELECT * FROM matches WHERE id = '$id'";
+    $query = $db->query($teamNames);
+    $teams = $query->fetch(PDO::FETCH_ASSOC);
+
+    $teamHome = $teams['team1'];
+    $teamAway = $teams['team2'];
+
+    $TeamHomeName = "SELECT * FROM team WHERE name = '$teamHome'";
+    $queryHomeTeam = $db->query($TeamHomeName);
+    $teamsHomeList = $queryHomeTeam->fetch(PDO::FETCH_ASSOC);
+
+    $pointsHome = $teamsHomeList['points'];
+    $teamHomePoints = $pointsHome += $team1;
+
+    $sql1 = "UPDATE team SET points = :Points WHERE name = '$teamHome'";
+    $prepare1 = $db->prepare($sql1);
+    $prepare1->execute([
+        ':Points' => $teamHomePoints
+    ]);
+
+	$TeamNameÁway = "SELECT * FROM team WHERE name = '$teamAway'";
+    $queryTeamAway = $db->query($TeamNameÁway);
+    $teamsListAway = $queryTeamAway->fetch(PDO::FETCH_ASSOC);
+
+    $points2 = $teamsListAway['points'];
+    $teamAwayPoints = $points2 += $team2;
+
+    $sql2 = "UPDATE team SET points = :Title WHERE name = '$teamAway'";
+    $prepare2 = $db->prepare($sql2);
+    $prepare2->execute([
+        ':Title'     => $teamAwayPoints
+    ]);
+  
+
+    
+    $sql = 'UPDATE `matches` SET
+              score1      = :score1,
+              score2      = :score2       
+            WHERE id = :id';
+    $prepare = $db->prepare($sql);
+    $prepare->execute([
+        ':score1'         => $score1,
+        ':score2'         => $Score2,
+        ':id'           => $id
+    ]);
+
+	echo $team1;
+	echo $team2;
+    	echo $teamAwayPoints;
+	echo $teamHomePoints;
+    exit;
+};
 if($_POST['type'] == 'login') {
 
     $username = $_POST['username'];
