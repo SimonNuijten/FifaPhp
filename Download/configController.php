@@ -46,12 +46,7 @@ if ($_POST ['type'] == 'score') {
         $team1 += 1;
         $team2 += 1;
     }
-	$sql1 = "UPDATE mathes played SET = :Points WHERE id = '$id'";
-    $prepare1 = $db->prepare($sql1);
-    $prepare1->execute([
-        ':Points' => '1'
-    ]);
-
+	
     $teamNames = "SELECT * FROM matches WHERE id = '$id'";
     $query = $db->query($teamNames);
     $teams = $query->fetch(PDO::FETCH_ASSOC);
@@ -66,8 +61,6 @@ if ($_POST ['type'] == 'score') {
     $pointsHome = $teamsHomeList['points'];
     $teamHomePoints = $pointsHome += $team1;
 
-    
-
 	$TeamNameÁway = "SELECT * FROM team WHERE name = '$teamAway'";
     $queryTeamAway = $db->query($TeamNameÁway);
     $teamsListAway = $queryTeamAway->fetch(PDO::FETCH_ASSOC);
@@ -81,8 +74,6 @@ if ($_POST ['type'] == 'score') {
         ':Title'     => $teamAwayPoints
     ]);
   
-
-    
     $sql = 'UPDATE `matches` SET
               score1      = :score1,
               score2      = :score2       
